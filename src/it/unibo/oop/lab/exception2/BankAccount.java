@@ -20,8 +20,9 @@ public interface BankAccount {
      *            id of the user requesting this operation
      * @param amount
      *            amount to be credited
+     * @throws WrongAccountHolderException 
      */
-    void deposit(int usrID, double amount);
+    void deposit(int usrID, double amount) throws WrongAccountHolderException;
 
     /**
      * 
