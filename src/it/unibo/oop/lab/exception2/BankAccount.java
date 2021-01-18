@@ -20,9 +20,8 @@ public interface BankAccount {
      *            id of the user requesting this operation
      * @param amount
      *            amount to be credited
-     * @throws WrongAccountHolderException 
      */
-    void deposit(int usrID, double amount) throws WrongAccountHolderException;
+    void deposit(int usrID, double amount);
 
     /**
      * 
@@ -39,8 +38,9 @@ public interface BankAccount {
      *            id of the user requesting this opera
      * @param amount
      *            amount to be withdrawn via AT
+     * @throws TransactionsOverQuotaException 
      */
-    void withdrawFromATM(int usrID, double amount);
+    void withdrawFromATM(int usrID, double amount) throws TransactionsOverQuotaException;
 
     /**
      * 
@@ -52,5 +52,5 @@ public interface BankAccount {
      * 
      * @return The total number of transaction for the account
      */
-    int getNTransactions();
+    int getTransactionCount();
 }

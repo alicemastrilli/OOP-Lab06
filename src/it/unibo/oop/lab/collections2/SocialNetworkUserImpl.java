@@ -1,12 +1,9 @@
 package it.unibo.oop.lab.collections2;
 
-
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
-
 
 /**
  * 
@@ -23,18 +20,7 @@ import java.util.List;
  */
 public class SocialNetworkUserImpl<U extends User> extends UserImpl implements SocialNetworkUser<U> {
 
-	HashMap <U, String> mappa;
-	
-    public SocialNetworkUserImpl(final String firstName,final String surname,final String user, final int userAge) {
-		super(firstName, surname, user, userAge);
-		this.mappa = new HashMap<>();
-	}
-
-    public SocialNetworkUserImpl(final String firstName,final String surname,final String user) {
-		super(firstName, surname, user, -1);
-		this.mappa = new HashMap<>();
-	}
-	/*
+    /*
      * 
      * [FIELDS]
      * 
@@ -70,17 +56,25 @@ public class SocialNetworkUserImpl<U extends User> extends UserImpl implements S
      *            alias of the user, i.e. the way a user is identified on an
      *            application
      */
-  
+    public SocialNetworkUserImpl(final String name, final String surname, final String user, final int userAge) {
+        super(name, surname, user, userAge);
+    }
+    
+    public SocialNetworkUserImpl(final String name, final String surname, final String user) {
+    	super(name,surname,user, -1);
+    	
+    }
+
     /*
      * [METHODS]
      * 
      * Implements the methods below
      */
-
-   
+    private HashMap<U, String> map = new HashMap<>();
+    @Override
     public boolean addFollowedUser(final String circle, final U user) {
-    	if (!mappa.containsKey(user)) {
-    		mappa.put(user, circle);
+    	if(!map.containsKey(user)) {
+    		map.put(user, circle);
     		return true;
     	}
         return false;
@@ -88,23 +82,22 @@ public class SocialNetworkUserImpl<U extends User> extends UserImpl implements S
 
     @Override
     public Collection<U> getFollowedUsersInGroup(final String groupName) {
-    	Collection <U> Seguiti  = new ArrayList<>();
-    	for (U elem : mappa.keySet() ) {
-    		if(mappa.get(elem) == groupName) {
-    			Seguiti.add(elem);
+    	ArrayList<U> list = new ArrayList<>();
+    	for(U us : map.keySet()) {
+    		if(map.get(us) == groupName) {
+    			list.add(us);
     		}
     	}
-        return Seguiti;
-
+        return list;
     }
 
     @Override
     public List<U> getFollowedUsers() {
-    	ArrayList <U> Seguiti  = new ArrayList<>();
-    	for(U elem : mappa.keySet()) {
-    		Seguiti.add(elem);
+    	ArrayList<U> list = new ArrayList<>();
+    	for(U us : map.keySet()) {
+    		list.add(us);
     	}
-    	return Seguiti;
+        return list;
     }
 
 }

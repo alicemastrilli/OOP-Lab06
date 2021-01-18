@@ -5,9 +5,13 @@ package it.unibo.oop.lab.exception1;
  * is situated.
  * 
  */
-public class RobotEnvironment {
+public class RobotEnvironment  {
 
     /**
+	 * 
+	 */
+
+	/**
      * Environment upper bound for the X coordinate.
      */
     public static final int WORLD_X_UPPER_LIMIT = 50;
@@ -46,15 +50,16 @@ public class RobotEnvironment {
      * @return A boolean indicating if the robot moved or not (a robot can move
      *         only inside the environment's boundaries)
      */
-    public void move(final int newX, final int newY) {
+    public void move(final int newX, final int newY)  throws PositionOutOfBoundException{
         if (newX >= RobotEnvironment.WORLD_X_LOWER_LIMIT
                 && newX <= RobotEnvironment.WORLD_X_UPPER_LIMIT
                 && newY >= RobotEnvironment.WORLD_Y_LOWER_LIMIT
                 && newY <= RobotEnvironment.WORLD_Y_UPPER_LIMIT) {
             this.position.setX(newX);
             this.position.setY(newY);
+            
         } else {
-            throw new PositionOutOfBoundException(newX, newY);
+            throw new PositionOutOfBoundException(newY, newY);
         }
     }
 
